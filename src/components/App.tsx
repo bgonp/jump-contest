@@ -1,7 +1,13 @@
-function App() {
+import { FC } from 'react'
+import { AuthProvider } from 'contexts/AuthContext'
+import Header from './Header'
+
+const App: FC = () => {
   return (
-    <div>initial commit</div>
-  );
+    <AuthProvider>
+      <Header />
+    </AuthProvider>
+  )
 }
 
-export default App;
+export default App
