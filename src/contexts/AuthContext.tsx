@@ -1,7 +1,7 @@
 import { createContext, FC, useContext, useEffect, useMemo, useState } from 'react'
 
 import { User } from 'models'
-import { signIn, signOut, onAuthChange } from 'actions/auth'
+import { signIn, signOut, onAuthChange } from 'services/auth'
 
 type AuthData = {
   user: User | null,
@@ -13,7 +13,7 @@ type AuthData = {
 
 const AuthContext = createContext<AuthData | null>(null)
 
-export const useAuth = (): AuthData => {
+export const useAuthContext = (): AuthData => {
   const context = useContext(AuthContext)
   if (context === null) throw Error('Cannot use context outside of provider')
   return context
@@ -42,7 +42,6 @@ export const AuthProvider: FC = ({ children }) => {
       setUser(user)
       setIsLoading(false)
     })
-
     return unsubscribe
   }, [])
 

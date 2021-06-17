@@ -13,7 +13,7 @@ const normalizeUser = (user: firebase.User | null): User | null => {
 
 export const signIn = () => {
   const provider = new firebase.auth.GoogleAuthProvider()
-  auth.signInWithPopup(provider)
+  return auth.signInWithPopup(provider)
 }
 
 export const signOut = () => auth.signOut()
