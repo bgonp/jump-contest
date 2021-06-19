@@ -8,7 +8,9 @@ const registrationWithNewAttempt = (
   height: number,
   success: boolean
 ): Registration => {
-  const attempts = [...registration.jumps[height], success]
+  const prevAttempts = registration.jumps[height]
+  if (prevAttempts === null) throw new Error('Competitor has passed')
+  const attempts = [...prevAttempts, success]
   const jumps = { ...registration.jumps, [height]: attempts }
   const max = success ? getMaxHeight(jumps) : registration.max
   const finished = Boolean(!success && attempts.length >= MAX_ATTEMPTS)

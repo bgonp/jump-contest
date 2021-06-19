@@ -4,19 +4,22 @@ import getMaxHeight from 'utils/getMaxKeyWhichValueContainsTrue'
 
 const registrationWithoutHeight = (
   registration: Registration,
-  height: number
+  removedHeight: number,
+  lastHeight: number
 ): Registration => {
-  const { [height]: last, ...jumps } = registration.jumps
+  const { [removedHeight]: last, ...jumps } = registration.jumps
   const max = getMaxHeight(jumps)
-  return { ...registration, jumps, max }
+  const finished = registration.finished && max < lastHeight
+  return { ...registration, finished, jumps, max }
 }
 
 const removeLastHeight = (competition: Competition): void => {
   if (competition.heights.length === 0) return
   const heights = competition.heights.slice(0, -1)
-  const lastHeight = competition.heights[heights.length]
+  const removedHeight = competition.heights[competition.heights.length - 1]
+  const lastHeight = heights[heights.length - 1]
   const registrations = competition.registrations.map(registration =>
-    registrationWithoutHeight(registration, lastHeight)
+    registrationWithoutHeight(registration, removedHeight, lastHeight)
   )
 
   update({ ...competition, heights, registrations })

@@ -7,15 +7,16 @@ const registrationWithoutLastAttempt = (
   height: number
 ): Registration => {
   const attempts = registration.jumps[height]
-  if (attempts.length === 0) return registration
+  if (attempts?.length === 0) return registration
 
   const jumps = {
     ...registration.jumps,
-    [height]: attempts.slice(0, attempts.length - 1),
+    [height]: attempts ? attempts.slice(0, attempts.length - 1) : [],
   }
   const max = getMaxHeight(jumps)
+  const finished = false
 
-  return { ...registration, jumps, max }
+  return { ...registration, finished, jumps, max }
 }
 
 const removeLastAttempt = (
