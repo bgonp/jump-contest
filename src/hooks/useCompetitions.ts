@@ -7,6 +7,10 @@ const useCompetitions = () => {
   const [isLoading, setIsLoading] = useState(true)
   const [competitions, setCompetitions] = useState<Competition[]>([])
 
+  const count = competitions.length
+  const noCompetitions = competitions.length === 0
+  const lastCompetition = noCompetitions ? null : competitions[count - 1]
+
   const addCompetition = useCallback(async (name: string, date: Date) => {
     setIsLoading(true)
     await createCompetition(name, date)
@@ -24,6 +28,8 @@ const useCompetitions = () => {
   return {
     isLoading,
     competitions,
+    lastCompetition,
+    noCompetitions,
     addCompetition,
   }
 }
