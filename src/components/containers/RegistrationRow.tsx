@@ -1,44 +1,47 @@
 import { FC } from 'react'
 
+import Attempts from 'components/containers/Attempts'
 import { Registration } from 'models'
-import getEditUserUrl from 'utils/getEditUserUrl'
-import { useAuthContext } from 'contexts/AuthContext'
 
 type Props = {
-  canEdit: boolean
+  canRemove: boolean
+  disabled: boolean
+  highlighted: boolean
   heights: number[]
   registration: Registration
+  withRank: boolean
   deleteRegistration: () => void
 }
 
 const RegistrationRow: FC<Props> = ({
-  canEdit,
+  canRemove,
+  disabled,
+  highlighted,
   heights,
   registration,
+  withRank,
   deleteRegistration,
 }) => {
-  const { isAuthed } = useAuthContext()
   const { id, competitor, jumps, max } = registration
-  const competitorName = !isAuthed || competitor.clubId === null
-    ? <span>{competitor.name} {competitor.surname}</span>
-    : (
-      <a
-        href={getEditUserUrl(competitor.clubId)}
-        target="_blank"
-        rel="noreferrer nofollow"
-      >
-        {competitor.name} {competitor.surname}
-      </a>
-      )
+
+  const className = `${disabled ? 'disabled' : ''} ${highlighted ? 'highlighted' : ''}`
+
+  const { rank } = registration
 
   return (
-    <tr>
-      <td>{competitorName}</td>
+    <tr className={className}>
+      {withRank && <td className={`rank rank-${rank}`}>{rank}</td>}
+      <td className="left">{competitor.name}</td>
       <td>{max}</td>
       {heights.map(height =>
-        <td key={`${id}-${height}`}>{jumps[height]}</td>
+        <td
+          key={`${id}-${height}`}
+          className={'stretch'}
+        >
+          <Attempts attempts={jumps[height]} />
+        </td>
       )}
-      {canEdit && <td><button onClick={deleteRegistration}>DELETE</button></td>}
+      {canRemove && <td><button onClick={deleteRegistration}>BORRAR</button></td>}
     </tr>
   )
 }

@@ -1,25 +1,21 @@
 import { FC } from 'react'
 import { useLocation } from 'wouter'
 
+import Title from 'components/common/Title'
 import { useAuthContext } from 'contexts/AuthContext'
 import ROUTES from 'constants/routes'
 
 const Header: FC = () => {
   const [, setLocation] = useLocation()
-  const { user, isAuthed, isLoading, logIn, logOut } = useAuthContext()
+  const { user, isAuthed, isLoading, logOut } = useAuthContext()
 
   return (
-    <>
-      {isAuthed && `Hello, ${user?.name}`}
-      {isLoading
-        ? 'Loading...'
-        : (isAuthed
-            ? <button onClick={logOut}>Log Out</button>
-            : <button onClick={logIn}>Log In</button>
-          )
-      }
+    <header>
+      <Title title="Competición de salto" />
+      {isAuthed && `${user?.name}`}
+      {!isLoading && isAuthed && <button onClick={logOut}>Log Out</button>}
       {isAuthed && <button onClick={() => setLocation(ROUTES.LIST)}>COMPETITIONS</button>}
-    </>
+    </header>
   )
 }
 

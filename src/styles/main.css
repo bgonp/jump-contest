@@ -1,0 +1,141 @@
+#root {
+  min-height: 100vh;
+}
+
+:root {
+  --color-hightlight: #3AAED8;
+  --color-text: #FBFFF1;
+  --color-background: #231f20;
+  --color-success: #06BA63;
+  --color-fail: #db4c40;
+}
+
+a {
+  display: inline-block;
+  text-decoration: none;
+  color: var(--color-text);
+  font-weight: 500;
+  padding: 1rem;
+}
+
+header, footer {
+  text-align: center;
+  background: var(--color-hightlight);
+}
+
+.title {
+  padding: 1rem;
+  font-weight: 500;
+}
+
+.title h2 {
+  color: #fff;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  color: var(--color-text);
+  background: var(--color-background);
+  font-family: 'Roboto', Calibri, 'Trebuchet MS', sans-serif;
+  font-weight: 300;
+  height: 100%;
+}
+
+main {
+  flex-grow: 1;
+  display: flex;
+  text-align: center;
+  justify-content: center;
+}
+
+.icon {
+  height: 1.6rem;
+  width: 1.6rem;
+  margin: -0.1rem -0.2rem;
+}
+
+.iconMinus {
+  width: 1.2rem;
+}
+
+.registrationTable {
+  border-collapse: collapse;
+  margin: 1rem auto;
+}
+
+.registrationTable tr {
+  height: 1.6rem;
+}
+
+.registrationTable th,
+.registrationTable td {
+  border-left: 1px solid #fff9;
+  border-right: 1px solid #fff9;
+  padding: 0.1rem 0.5rem 0.1rem;
+  vertical-align: middle;
+  font-size: 0.8rem;
+  white-space: nowrap;
+}
+
+.registrationTable th {
+  font-weight: 500;
+  border-bottom: 1px solid #fff9;
+  padding: 0.25rem 0.5rem;
+}
+
+.registrationTable tr.disabled td {
+  opacity: 0.4;
+}
+
+.registrationTable tr.highlighted td {
+  background: #fff3;
+}
+
+.registrationTable td.left {
+  text-align: left;
+}
+
+.registrationTable td.stretch {
+  padding-left: 0.4rem;
+  padding-right: 0.4rem;
+  padding-bottom: 0;
+}
+
+.registrationTable td.rank {
+  font-weight: 500;
+}
+
+.registrationTable tr.current th {
+  border-top: #fff9;
+  background: #fff9;
+  color: var(--color-background);
+  padding: 0.75rem 0.2rem;
+  font-size: 1rem;
+}
+
+.loading {
+  background: #fff5;
+  bottom: 0;
+  left: 0;
+  position: fixed;
+  right: 0;
+  top: 0;
+  z-index: 100;
+  backdrop-filter: blur(0.3rem);
+}
+
+.controls button,
+.controls form {
+  display: block;
+  margin: 0.5rem auto;
+}
+
+.competitor {
+  border: 1px solid #fff9;
+  padding: 1rem;
+}
+
+.competitor button {
+  display: inline-block;
+}

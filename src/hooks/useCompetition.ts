@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react'
+import { useCallback, useEffect, useMemo, useState } from 'react'
 
 import { Competition } from 'models'
 import {
@@ -8,6 +8,7 @@ import {
   createRegistration,
   finishCompetition,
   listenCompetition,
+  passHeight,
   removeLastAttempt,
   removeLastHeight,
   removeRegistration,
@@ -17,6 +18,8 @@ const useCompetition = () => {
   const [id, setId] = useState<string | null>(null)
   const [isLoading, setIsLoading] = useState(true)
   const [competition, setCompetition] = useState<Competition | null>(null)
+  const [lastRegistrationId, setLastRegistrationId] = useState<string | null>(null)
+  const [lastHeight, setLastHeight] = useState<number | null>(null)
 
   const setCompetitionId = useCallback((newId: string) => {
     if (newId === id) return
@@ -33,13 +36,23 @@ const useCompetition = () => {
     if (competition === null) return
     setIsLoading(true)
     createAttempt(competition, registrationId, height, success)
+    setLastRegistrationId(registrationId)
+    setLastHeight(height)
   }, [competition])
 
-  const deleteLastAttempt = useCallback((registrationId: string, height: number) => {
+  const passAttempt = useCallback((registrationId: string, height: number) => {
     if (competition === null) return
     setIsLoading(true)
-    removeLastAttempt(competition, registrationId, height)
+    passHeight(competition, registrationId, height)
+    setLastRegistrationId(registrationId)
+    setLastHeight(height)
   }, [competition])
+
+  const deleteLastAttempt = useCallback(() => {
+    if (competition === null || !lastRegistrationId || !lastHeight) return
+    setIsLoading(true)
+    removeLastAttempt(competition, lastRegistrationId, lastHeight)
+  }, [competition, lastRegistrationId, lastHeight])
 
   const addHeight = useCallback((height: number) => {
     if (competition === null) return
@@ -48,7 +61,7 @@ const useCompetition = () => {
   }, [competition])
 
   const deleteLastHeight = useCallback(() => {
-    if (competition === null) return
+    if (competition === null || competition.heights.length === 0) return
     setIsLoading(true)
     removeLastHeight(competition)
   }, [competition])
@@ -66,7 +79,7 @@ const useCompetition = () => {
   }, [competition])
 
   const deleteRegistration = useCallback((registrationId: string) => {
-    if (competition === null) return
+    if (competition === null || competition.closed) return
     setIsLoading(true)
     removeRegistration(competition, registrationId)
   }, [competition])
@@ -83,6 +96,13 @@ const useCompetition = () => {
     finishCompetition(competition)
   }, [competition])
 
+  const rankedRegistrations = useMemo(() => {
+    if (!competition || !competition.finished) return []
+    return ([...competition.registrations]).sort(
+      (a, b) => (a.rank ?? 0) - (b.rank ?? 0)
+    )
+  }, [competition])
+
   useEffect(() => {
     if (id === null) return
     const unsubscribe = listenCompetition(id, (competition) => {
@@ -95,9 +115,11 @@ const useCompetition = () => {
   return {
     isLoading,
     competition,
+    rankedRegistrations,
     setCompetitionId,
     addAttempt,
     deleteLastAttempt,
+    passAttempt,
     addHeight,
     deleteLastHeight,
     addRegistration,

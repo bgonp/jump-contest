@@ -10,11 +10,12 @@ const CompetitionListPage: FC = () => {
 
   if (isLoading) return <Loading />
 
-  if (noCompetitions) return <h2>No competitions yet</h2>
-
   return (
     <>
-      <CompetitionList competitions={competitions} />
+      {noCompetitions
+        ? <h2>No competitions yet</h2>
+        : <CompetitionList competitions={competitions} />
+      }
       <AddCompetitionForm callback={addCompetition} />
     </>
   )

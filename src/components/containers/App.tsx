@@ -5,6 +5,9 @@ import { CompetitionProvider } from 'contexts/CompetitionContext'
 import Router from 'components/router/Router'
 import Wrapper from 'components/containers/Wrapper'
 
+import 'styles/reset.css'
+import 'styles/main.css'
+
 const App: FC = () => {
   return (
     <AuthProvider>

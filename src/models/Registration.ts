@@ -5,6 +5,6 @@ export type Registration = {
   finished: boolean,
   competitor: Competitor,
   rank: number | null,
-  jumps: Record<number, boolean[]>
+  jumps: Record<number, boolean[] | null>
   max: number
 }

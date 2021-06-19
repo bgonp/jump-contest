@@ -16,9 +16,11 @@ const CompetitionList: FC<{ competitions: Competition[] }> = ({ competitions }) 
         ? <h2>No competitions yet</h2>
         : (
           <ul>
-            {competitions.map(({ id, date }) => (
+            {competitions.map(({ id, date, name }) => (
               <li key={id}>
-                <button onClick={() => navigate(id)}>{date.toISOString()}</button>
+                <button onClick={() => navigate(id)}>
+                  {name} ({date.toLocaleDateString()})
+                </button>
               </li>
             ))}
           </ul>

@@ -4,11 +4,11 @@ import Footer from 'components/containers/Footer'
 import Header from 'components/containers/Header'
 
 const Wrapper: FC = ({ children }) => (
-  <div className="main">
+  <div className="wrapper">
     <Header />
-    <div className="content">
+    <main>
       {children}
-    </div>
+    </main>
     <Footer />
   </div>
 )

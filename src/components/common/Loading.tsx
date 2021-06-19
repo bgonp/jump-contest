@@ -1,5 +1,5 @@
 import { FC } from 'react'
 
-const Loading: FC = () => <h2>LOADING...</h2>
+const Loading: FC = () => <div className="loading" />
 
 export default Loading

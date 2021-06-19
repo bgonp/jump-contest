@@ -6,7 +6,7 @@ type Props = {
 }
 
 const Title: FC<Props> = ({ title, subtitle }) => (
-  <div>
+  <div className="title">
     <h2>{title}</h2>
     {subtitle && <h3>{subtitle}</h3>}
   </div>

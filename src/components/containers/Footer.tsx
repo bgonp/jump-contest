@@ -1,5 +1,11 @@
 import { FC } from 'react'
 
-const Footer: FC = () => (<div>This is a footer</div>)
+import Link from 'components/common/Link'
+
+const Footer: FC = () => (
+  <footer>
+    <Link href="http://madrid.clubtres60.com">Club Tres60</Link>
+  </footer>
+)
 
 export default Footer

@@ -16,7 +16,7 @@ const normalizeJumps = (data: Record<string, any>): Registration['jumps'] =>
     ...jumps,
     [parseInt(height)]: Array.isArray(attempts)
       ? attempts.map(attempt => Boolean(attempt))
-      : [],
+      : null,
   }), {} as Registration['jumps'])
 
 const normalizeRegistration = (data: Record<string, any>): Registration => ({
