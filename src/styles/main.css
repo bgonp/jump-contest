@@ -1,13 +1,15 @@
-#root {
-  min-height: 100vh;
-}
-
 :root {
   --color-hightlight: #3AAED8;
   --color-text: #FBFFF1;
   --color-background: #231f20;
   --color-success: #06BA63;
   --color-fail: #db4c40;
+}
+
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
 a {
@@ -35,6 +37,7 @@ header, footer {
 .wrapper {
   display: flex;
   flex-direction: column;
+  flex-grow: 1;
   color: var(--color-text);
   background: var(--color-background);
   font-family: 'Roboto', Calibri, 'Trebuchet MS', sans-serif;
