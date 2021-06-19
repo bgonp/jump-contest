@@ -139,6 +139,18 @@ main {
   padding: 1rem;
 }
 
+.competitor .buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 0.5rem;
+}
+
 .competitor button {
+  background: none;
+  border-radius: 50%;
+  border: 0.2rem solid var(--color-text);
   display: inline-block;
+  height: 3rem;
+  width: 3rem;
+  vertical-align: middle;
 }
