@@ -1,7 +1,7 @@
 import { ComponentProps, FC } from 'react'
 import { Redirect, Route } from 'wouter'
 
-import Loading from 'components/Loading'
+import Loading from 'components/common/Loading'
 import ROUTES from 'constants/routes'
 import { useAuthContext } from 'contexts/AuthContext'
 

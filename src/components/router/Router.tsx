@@ -1,9 +1,9 @@
 import { FC } from 'react'
 import { Redirect, Switch } from 'wouter'
 
-import Competition from 'components/Competition'
-import CompetitionList from 'components/CompetitionList'
-import LastCompetition from 'components/LastCompetition'
+import CompetitionEditPage from 'components/pages/CompetitionEditPage'
+import CompetitionsListPage from 'components/pages/CompetitionsListPage'
+import CompetitionViewPage from 'components/pages/CompetitionViewPage'
 import PrivateRoute from 'components/router/PrivateRoute'
 import PublicRoute from 'components/router/PublicRoute'
 import ROUTES from 'constants/routes'
@@ -11,13 +11,13 @@ import ROUTES from 'constants/routes'
 const Router: FC = () => (
   <Switch>
     <PublicRoute path={ROUTES.VIEW}>
-      <LastCompetition />
+      <CompetitionViewPage />
     </PublicRoute>
     <PrivateRoute path={ROUTES.LIST}>
-      <CompetitionList />
+      <CompetitionsListPage />
     </PrivateRoute>
     <PrivateRoute path={ROUTES.EDIT}>
-      {({ id }) => <Competition id={id} />}
+      {({ id }) => <CompetitionEditPage id={id} />}
     </PrivateRoute>
     <Redirect href={ROUTES.VIEW} />
   </Switch>
