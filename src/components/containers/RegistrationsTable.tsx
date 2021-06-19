@@ -25,13 +25,13 @@ const RegistrationsTable: FC = () => {
           {finished && <th rowSpan={2}>Puesto</th>}
           <th rowSpan={2}>Nombre</th>
           <th rowSpan={2}>Max</th>
-          {lastHeights.length > 0 && (
+          {!finished && lastHeights.length > 0 && (
             <th colSpan={lastHeights.length}>Últimas alturas (cm)</th>
           )}
           {!closed && isAuthed && <th rowSpan={2}>BORRAR?</th>}
         </tr>
         <tr>
-          {lastHeights.map(height => <th key={height}>{height}</th>)}
+          {!finished && lastHeights.map(height => <th key={height}>{height}</th>)}
         </tr>
       </thead>
       <tbody>
@@ -41,7 +41,7 @@ const RegistrationsTable: FC = () => {
             canRemove={!closed && isAuthed}
             highlighted={!finished && registration.id === registrationId}
             disabled={!finished && registration.finished}
-            heights={lastHeights}
+            heights={finished ? [] : lastHeights}
             registration={registration}
             withRank={finished}
             deleteRegistration={() => deleteRegistration(registration.id)}
